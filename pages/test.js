@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const content = {
   marginTop: "100px",
@@ -25,11 +25,40 @@ const data = [
 const Context = React.createContext({ name: "Default" });
 
 export default function Test() {
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
+  useInterval(() => {
+    // Your custom logic here
+    openNotification(count);
+    setCount(count + 1);
+    if (count === data.length - 1) {
+      setCount(0);
+    }
+  }, 3000);
+
   const [api, contextHolder] = notification.useNotification();
 
   const [count, setCount] = useState(0);
 
-  const openNotification = () => {
+  const openNotification = (count) => {
     // api.info({
     notification.open({
       message: `Thank you ${data[count].name}`,
@@ -40,11 +69,11 @@ export default function Test() {
       //   name,
       //   amount,
     });
-    if (count === data.length - 1) {
-      setCount(0);
-    } else {
-      setCount((prevCount) => prevCount + 1);
-    }
+    // if (count === data.length - 1) {
+    //   setCount(0);
+    // } else {
+    //   setCount((prevCount) => prevCount + 1);
+    // }
 
     // });
   };
@@ -55,10 +84,12 @@ export default function Test() {
         {contextHolder}
         <Divider />
         <Space>
-          <Button type="primary" onClick={() => openNotification()}>
-            {/* <RadiusBottomrightOutlined /> */}
+          {/* <Button type="primary" onClick={() => openNotification()}>
+            {/* <RadiusBottomrightOutlined /> 
             Update Overlay
-          </Button>
+          </Button> */}
+          <h1>{count}</h1>
+          {/* {() => openNotification(count)} */}
         </Space>
       </Context.Provider>
     </div>

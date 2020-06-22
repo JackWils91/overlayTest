@@ -35,7 +35,7 @@ export default function Test() {
       message: `Thank you ${data[count].name}`,
       description:
         // <Context.Consumer>{({ name }) => `For you generous donation of ${name}!`}</Context.Consumer>
-        `For your generous donation of ${data[count].amount}!`,
+        `For your generous donation of $ ${data[count].amount}!`,
       //   placement,
       //   name,
       //   amount,
@@ -57,7 +57,7 @@ export default function Test() {
         <Space>
           <Button type="primary" onClick={() => openNotification()}>
             {/* <RadiusBottomrightOutlined /> */}
-            bottomRight
+            Update Overlay
           </Button>
         </Space>
       </Context.Provider>

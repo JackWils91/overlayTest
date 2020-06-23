@@ -7,7 +7,7 @@ import useSWR from "swr";
 import { useUser } from "../utils/auth/useUser";
 
 import Player from "../components/Player";
-import PlayerCSS from "../components/PlayerCss";
+// import PlayerCSS from "../components/PlayerCss";
 
 const content = {
   marginTop: "100px",

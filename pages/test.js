@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const content = {
   marginTop: "100px",
@@ -97,6 +98,13 @@ export default function Test() {
           </Button> */}
           <h1>{count}</h1>
           <button>Click here to enable voice</button>
+
+          <p>
+            Navigate back to home to stop{" "}
+            <Link href={"/"}>
+              <a>Home</a>
+            </Link>
+          </p>
 
           {/* {() => openNotification(count)} */}
         </Space>

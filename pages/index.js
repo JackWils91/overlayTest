@@ -51,6 +51,12 @@ export default function Home() {
             <a>Sign in</a>
           </Link>
         </p>
+        <p>
+          Check voice enablement here -->{" "}
+          <Link href={"/test"}>
+            <a>Donation and Voice</a>
+          </Link>
+        </p>
       </>
     );
   }

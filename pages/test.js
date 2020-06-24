@@ -52,7 +52,7 @@ export default function Test() {
     if (count === data.length - 1) {
       setCount(0);
     }
-  }, 3000);
+  }, 5000);
 
   const [api, contextHolder] = notification.useNotification();
 
@@ -60,6 +60,13 @@ export default function Test() {
 
   const openNotification = (count) => {
     // api.info({
+
+    speechSynthesis.speak(
+      new SpeechSynthesisUtterance(
+        `Thank you ${data[count].name} for your generous donation of $ ${data[count].amount}!`
+      )
+    );
+
     notification.open({
       message: `Thank you ${data[count].name}`,
       description:
@@ -89,6 +96,8 @@ export default function Test() {
             Update Overlay
           </Button> */}
           <h1>{count}</h1>
+          <button>Click here to enable voice</button>
+
           {/* {() => openNotification(count)} */}
         </Space>
       </Context.Provider>

@@ -67,6 +67,6 @@ export default (req, res) => {
       res.status(200).json({ res: "Chat global variable cleared" });
     }
   } else {
-    res.status(405).end("What you doing mate?");
+    res.status(405).end("What you doing mate??");
   }
 };

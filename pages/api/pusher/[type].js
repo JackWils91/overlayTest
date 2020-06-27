@@ -58,7 +58,7 @@ export default (req, res) => {
     // { "name": "channel_vacated", "channel": "my-channel" } webhhok
     const { name, channel } = req.body;
     console.log("name", name, "channel_vacated", channel);
-    if (name === channel_vacated) {
+    if (name === "channel_vacated") {
       chatHistory.messages = [];
       console.log(
         "global chat history variable should be cleared",

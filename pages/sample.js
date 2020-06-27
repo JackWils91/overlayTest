@@ -54,7 +54,7 @@ export default function Sample() {
               borderStyle: "solid",
             }}
           >
-            Video
+            Video 1920 x 1080px
           </Content>
           <Sider
             style={{

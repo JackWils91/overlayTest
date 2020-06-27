@@ -8,11 +8,9 @@ import dynamic from "next/dynamic";
 //   NotificationOutlined,
 // } from "@ant-design/icons";
 
-// const Chat3 = dynamic(() => import("../components/Chat3"), {
-//   ssr: false,
-// });
-
-import ChatDesign from "../components/ChatDesign";
+const Chat1 = dynamic(() => import("../components/Chat1"), {
+  ssr: false,
+});
 
 // const { SubMenu } = Menu;
 // const { Header, Content, Footer, Sider } = Layout;
@@ -20,7 +18,7 @@ import ChatDesign from "../components/ChatDesign";
 export default function Sample() {
   return (
     <>
-      <ChatDesign />
+      <Chat1 />
     </>
   );
 }

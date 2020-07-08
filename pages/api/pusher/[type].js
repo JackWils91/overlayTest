@@ -8,7 +8,7 @@ const pusher = new Pusher({
   key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
   secret: process.env.NEXT_PUBLIC_PUSHER_APP_SECRET,
   cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
-  encrypted: true,
+  // encrypted: true,
 });
 
 // console.log("works server side?", process.env.NEXT_PUBLIC_PUSHER_APP_ID);
@@ -25,8 +25,14 @@ export default (req, res) => {
     console.log("api/pusher/message", req.body, "method", req.method);
     if (req.method === "POST") {
       try {
-        const { user = null, message = "", timestamp = +new Date() } = req.body;
-        const chat = { user, message, timestamp };
+        const {
+          user = null,
+          message = "",
+          timestamp = +new Date(),
+          store = [],
+        } = req.body;
+        // console.log("the store-->", store);
+        const chat = { user, message, timestamp, store };
         chatHistory.messages.push(chat);
         pusher.trigger("chat-room", "new-message", { chat });
         console.log("message-->", { chat });

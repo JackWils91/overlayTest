@@ -7,7 +7,12 @@ import { EllipsisOutlined } from "@ant-design/icons";
 const { Paragraph } = Typography;
 // import image from "../public/profilePic.jpg";
 
-const image = "/xss.jpg";
+// import image1 from "../profilePic1.jpg";
+//"/newphp1.gif";
+// import pic from "../alert.png";
+// import image from "../newProfilePic1.gif";
+
+const image = "";
 
 const layout = {
   labelCol: { span: 8 },
@@ -151,12 +156,48 @@ const Xss = (props) => {
   //   {
   //     <img src={image} />;
   //   }
+
+  // var cnvs;
+  // var dataURL;
+  // var button;
+
+  // if (document !== undefined) {
+  //   (cnvs = document.getElementById("cnvs")),
+  //     (ctx = cnvs.getContext("2d")),
+  //     (mirror = document.getElementById("mirror"));
+
+  //   cnvs.width = mirror.width = window.innerWidth;
+  //   cnvs.height = mirror.height = window.innerHeight;
+
+  //   mirror.addEventListener("contextmenu", function (e) {});
+
+  //   mirror.addEventListener("contextmenu", function (e) {
+  //     dataURL = canvas.toDataURL("image/png");
+  //     mirror.src = dataURL;
+  //   });
+
+  //   button = document.getElementById("btn-download");
+  //   button.addEventListener("click", function (e) {
+  //     var dataURL = canvas.toDataURL("image/png");
+  //     button.href = dataURL;
+  //   });
+  // }
+
   return (
     // <div>
     <>
+      {/* <div class="canvas__container">
+        <canvas id="cnvs" class="canvas__canvas"></canvas>
+        <img src="" id="mirror" class="canvas__mirror" />
+      </div>
+      <a href="#" class="button" id="btn-download" download="my-file-name.png">
+        Download
+      </a> */}
+
       {/* <script src="/api/xss/test"></script> */}
-      {/* <script>{alert("ALert")}</script> */}
+      {/* <script>alert(1)</script> */}
       <img source={image} />
+
       <p>
         This page is static because it does not fetch any data or include the
         authed user info.
@@ -197,13 +238,9 @@ const Xss = (props) => {
           {content}
         </Content>
       </PageHeader>
-
       {typeof window !== "undefined" &&
-        comments.map((comment, index) => {
-          comment;
-        })}
+        comments.map((comment, index) => <p>{comment}</p>)}
       {/* </div> */}
-
       <Form
         {...layout}
         name="basic"

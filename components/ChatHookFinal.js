@@ -5,13 +5,16 @@ import { fetchPostJSON } from "../utils/routing";
 import ChatMessageHookFinal from "./ChatMessageHookFinal";
 
 const messageRoute =
-  process.env === "production"
+  process.env.NODE_ENV === "production"
     ? "https://charity-chachacha.herokuapp.com/message"
     : "/api/pusher/message";
 const messagesRoute =
-  process.env === "production"
+  process.env.NODE_ENV === "production"
     ? "https://charity-chachacha.herokuapp.com/messages"
     : "/api/pusher/messages";
+
+console.log("process.env->", process.env.NODE_ENV);
+console.log("process.env prod?->", process.env.NODE_ENV === "production");
 
 const ChatHookFinal = (props) => {
   console.log("is this even rendering??");

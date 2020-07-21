@@ -22,7 +22,10 @@ class Chat extends Component {
     });
 
     this.pusher.connection.bind("connected", () => {
-      fetchPostJSON("/api/pusher/messages", {}).then((response) => {
+      fetchPostJSON(
+        "https://charity-chachacha.herokuapp.com/messages",
+        {}
+      ).then((response) => {
         console.log("the response-->", response);
         const chats = response.messages;
         console.log("chats-->", chats);
@@ -45,7 +48,7 @@ class Chat extends Component {
 
       evt.target.value = "";
       //   axios.post("/message", chat);
-      fetchPostJSON("/api/pusher/message", chat);
+      fetchPostJSON("https://charity-chachacha.herokuapp.com/message", chat);
     }
   };
 

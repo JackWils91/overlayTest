@@ -27,6 +27,7 @@ export async function fetchPostJSON(url, data) {
     console.log("fetchPostJSON", response);
     return await response.json(); // parses JSON response into native JavaScript objects
   } catch (err) {
+    console.log("fetching error-->", err);
     throw new Error(err.message);
   }
 }

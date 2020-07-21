@@ -4,12 +4,14 @@ import Pusher from "pusher-js";
 import { fetchPostJSON } from "../utils/routing";
 import ChatMessageHookFinal from "./ChatMessageHookFinal";
 
-const messageRoute = process.env.production
-  ? "https://charity-chachacha.herokuapp.com/message"
-  : "/api/pusher/message";
-const messagesRoute = process.env.production
-  ? "https://charity-chachacha.herokuapp.com/messages"
-  : "/api/pusher/messages";
+const messageRoute =
+  process.env === "production"
+    ? "https://charity-chachacha.herokuapp.com/message"
+    : "/api/pusher/message";
+const messagesRoute =
+  process.env === "production"
+    ? "https://charity-chachacha.herokuapp.com/messages"
+    : "/api/pusher/messages";
 
 const ChatHookFinal = (props) => {
   console.log("is this even rendering??");

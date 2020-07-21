@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import ChatHookFinal from "../components/ChatHookFinal";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
@@ -8,20 +9,21 @@ import {
   NotificationOutlined,
 } from "@ant-design/icons";
 
-const Chat1 = dynamic(() => import("../components/Chat1"), {
-  ssr: false,
-});
+// const Chat1 = dynamic(() => import("../components/Chat1"), {
+//   ssr: false,
+// });
 
-const Chat3 = dynamic(() => import("../components/Chat3"), {
-  ssr: false,
-});
+// const Chat3 = dynamic(() => import("../components/Chat3"), {
+//   ssr: false,
+// });
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function Sample() {
+  console.log("sample rendering?");
   const randomVariable = 1;
-
+  const [user, setUser] = useState("Jack");
   return (
     <>
       <Layout>
@@ -65,7 +67,9 @@ export default function Sample() {
             width={450}
             className="site-layout-background"
           >
-            <Chat3 />
+            {/* <Chat3 /> */}
+            {/* {user && <ChatHookFinal activeUser={user} />} */}
+            <ChatHookFinal activeUser={user} />
           </Sider>
         </Layout>
       </Layout>

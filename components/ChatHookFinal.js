@@ -4,7 +4,15 @@ import Pusher from "pusher-js";
 import { fetchPostJSON } from "../utils/routing";
 import ChatMessageHookFinal from "./ChatMessageHookFinal";
 
-const Chat = (props) => {
+const messageRoute = process.env.production
+  ? "https://charity-chachacha.herokuapp.com/message"
+  : "/api/pusher/message";
+const messagesRoute = process.env.production
+  ? "https://charity-chachacha.herokuapp.com/messages"
+  : "/api/pusher/messages";
+
+const ChatHookFinal = (props) => {
+  console.log("is this even rendering??");
   const [pusher, setPusher] = useState();
   const [channel, setChannel] = useState();
   const [chats, setChats] = useState([]);
@@ -26,10 +34,7 @@ const Chat = (props) => {
     });
 
     pusher.connection.bind("connected", () => {
-      fetchPostJSON(
-        "https://charity-chachacha.herokuapp.com/messages",
-        {}
-      ).then((response) => {
+      fetchPostJSON(messagesRoute, {}).then((response) => {
         console.log("the response-->", response);
         const chats = response.messages;
         console.log("chats-->", chats);
@@ -53,7 +58,7 @@ const Chat = (props) => {
 
       evt.target.value = "";
       //   axios.post("/message", chat);
-      fetchPostJSON("https://charity-chachacha.herokuapp.com/message", chat);
+      fetchPostJSON(messageRoute, chat);
     }
   };
 
@@ -121,4 +126,4 @@ const Chat = (props) => {
   );
 };
 
-export default Chat;
+export default ChatHookFinal;

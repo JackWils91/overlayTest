@@ -25,17 +25,23 @@ export default (req, res) => {
     console.log("api/pusher/message", req.body, "method", req.method);
     if (req.method === "POST") {
       try {
-        const {
-          user = null,
-          message = "",
-          timestamp = +new Date(),
-          store = [],
-        } = req.body;
-        // console.log("the store-->", store);
-        const chat = { user, message, timestamp, store };
+        // const {
+        //   user = null,
+        //   message = "",
+        //   timestamp = +new Date(),
+        //   store = [],
+        // } = req.body;
+        // // console.log("the store-->", store);
+        // const chat = { user, message, timestamp, store };
+        // chatHistory.messages.push(chat);
+        // pusher.trigger("chat-room", "new-message", { chat });
+        // console.log("message-->", { chat });
+        const { user = null, message = "", timestamp = +new Date() } = req.body;
+        // const sentimentScore = sentiment.analyze(message).score;
+        const chat = { user, message, timestamp };
+
         chatHistory.messages.push(chat);
         pusher.trigger("chat-room", "new-message", { chat });
-        console.log("message-->", { chat });
         res.status(200).json({ res: "message triggered on channel" });
       } catch (e) {
         console.log("the error in message", e);

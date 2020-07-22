@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import ChatHookFinal from "../components/ChatHookFinal";
 import Player from "../components/Player";
-import { Layout, Menu, Breadcrumb, Carousel } from "antd";
+import { Layout, Menu, Breadcrumb, Carousel, Button } from "antd";
+import CollectionsPage from "../components/MakeADonation";
 import {
   UserOutlined,
   LaptopOutlined,
@@ -50,8 +51,9 @@ export default function Sample() {
     // currentHeight: 751.5,
     // videoWidth: 960,
     // videoHeight: 400,
+    // marginBottom: 24,
   };
-  const [user, setUser] = useState("Jack");
+  const [user, setUser] = useState("Anonymous");
   return (
     <>
       <Layout>
@@ -87,7 +89,30 @@ export default function Sample() {
           >
             {/* Video 1920 x 1080px */}
             <Player {...videoJsOptions} />
+            {/* <Content
+              className="site-layout-background"
+              style={{
+                padding: 24,
+                margin: 0,
+                minHeight: 70,
+                // borderStyle: "solid",
+                background: "rgba(255, 255, 255, 0.2)",
+              }}
+            > */}
+            {/* <Button
+              onClick={() => {
+                console.log("sends to a donate page?");
+              }}
+              style={{ marginTop: 24 }}
+              size="large"
+              type="primary"
+            >
+              Make a donation
+            </Button> */}
+            <CollectionsPage />
+            {/* </Content> */}
           </Content>
+
           <Sider
             style={{
               padding: "0 24px 24px",
@@ -104,7 +129,7 @@ export default function Sample() {
         </Layout>
       </Layout>
       <Layout>
-        <Layout style={{ padding: "0 24px 24px" }}>
+        {/* <Layout style={{ padding: "0 24px 24px" }}>
           <Content
             className="site-layout-background"
             style={{
@@ -116,7 +141,7 @@ export default function Sample() {
           >
             Make a Donation
           </Content>
-        </Layout>
+        </Layout> */}
       </Layout>
       <Layout>
         <Layout style={{ padding: "0 24px 24px" }}>

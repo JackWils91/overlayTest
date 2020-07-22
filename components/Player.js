@@ -18,10 +18,10 @@ const Player = (props) => {
 
   return (
     <>
-      <h1>
+      {/* <h1>
         Live streaming the Auction event through youtube on the website eg with
         Sky news live
-      </h1>
+      </h1> */}
       <div data-vjs-player>
         <video ref={onVideo} className="video-js" playsInline />
       </div>

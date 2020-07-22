@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import ChatHookFinal from "../components/ChatHookFinal";
-
+import Player from "../components/Player";
 import { Layout, Menu, Breadcrumb, Carousel } from "antd";
 import {
   UserOutlined,
@@ -34,6 +34,23 @@ const settings = {
 export default function Sample() {
   console.log("sample rendering?");
   const randomVariable = 1;
+  const videoJsOptions = {
+    techOrder: ["youtube"],
+    autoplay: true,
+    controls: true,
+    sources: [
+      {
+        src: "https://www.youtube.com/watch?v=9Auq9mYxFEE",
+        type: "video/youtube",
+      },
+    ],
+    // width: 1920,
+    height: 450,
+    // currentWidth: 1002,
+    // currentHeight: 751.5,
+    // videoWidth: 960,
+    // videoHeight: 400,
+  };
   const [user, setUser] = useState("Jack");
   return (
     <>
@@ -61,13 +78,15 @@ export default function Sample() {
           <Content
             className="site-layout-background"
             style={{
-              padding: 24,
-              marginRight: 12,
+              // padding: 24,
+              // marginRight: 12,
               minHeight: 450,
-              borderStyle: "solid",
+              // borderStyle: "solid",
+              background: "rgba(255, 255, 255, 0.2)",
             }}
           >
-            Video 1920 x 1080px
+            {/* Video 1920 x 1080px */}
+            <Player {...videoJsOptions} />
           </Content>
           <Sider
             style={{
@@ -104,10 +123,10 @@ export default function Sample() {
           <Content
             className="site-layout-background"
             style={{
-              padding: 24,
+              // padding: 24,
               margin: 0,
               minHeight: 150,
-              borderStyle: "solid",
+              // borderStyle: "solid",
             }}
           >
             <Carousel {...settings}>

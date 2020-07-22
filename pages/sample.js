@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import ChatHookFinal from "../components/ChatHookFinal";
 
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Carousel } from "antd";
 import {
   UserOutlined,
   LaptopOutlined,
@@ -19,6 +19,17 @@ import {
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
+
+const settings = {
+  dots: true,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 9000,
+  // autoplaySpeed: 9000,
+  cssEase: "linear",
+};
 
 export default function Sample() {
   console.log("sample rendering?");
@@ -99,7 +110,20 @@ export default function Sample() {
               borderStyle: "solid",
             }}
           >
-            Carousel
+            <Carousel {...settings}>
+              <div>
+                <h3>1</h3>
+              </div>
+              <div>
+                <h3>2</h3>
+              </div>
+              <div>
+                <h3>3</h3>
+              </div>
+              <div>
+                <h3>4</h3>
+              </div>
+            </Carousel>
           </Content>
         </Layout>
       </Layout>

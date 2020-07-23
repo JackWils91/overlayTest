@@ -11,7 +11,9 @@ import {
   Card,
   Row,
   Col,
+  Input,
 } from "antd";
+const { TextArea } = Input;
 import CollectionsPage from "../components/MakeADonation";
 import LoginButton from "../components/LoginButton";
 import {
@@ -78,8 +80,16 @@ export default function Sample() {
     // top: "0%",
     // right: "0%",
   };
-  const [user, setUser] = useState("Anonymous");
+  const [user, setUser] = useState("Guest");
 
+  const onChange = (e) => {
+    console.log("test box", e.target.value);
+  };
+
+  const gridStyle = {
+    width: "25%",
+    textAlign: "center",
+  };
   return (
     <Layout>
       <Header className="header">
@@ -117,7 +127,66 @@ export default function Sample() {
           <CollectionsPage title={"Make a Donation"} />
         </Content>
         <Sider width={450} className="site-layout-background">
-          <ChatHookFinal activeUser={user} />
+          <Card
+            title={user}
+            style={{ boxSizing: "border-box", height: "100%" }}
+          >
+            <Card.Grid hoverable={false} style={gridStyle}>
+              Content
+            </Card.Grid>
+            <Card.Grid style={gridStyle}>Content</Card.Grid>
+            {/* <Card
+              type="inner"
+              size="small"
+              bordered={false}
+              // title="Inner Card title"
+              extra={<a href="#">{`${user} 1`}</a>}
+              headStyle={{ background: "#ffffff" }}
+              bodyStyle={{ background: "#fafafa", maxWidth: "70%" }}
+            >
+              Inner Card content
+            </Card>
+            <Card
+              style={{ marginTop: 16 }}
+              type="inner"
+              size="small"
+              bordered={false}
+              // title="Inner Card title"
+              extra={<a href="#">{`${user} 2`}</a>}
+              headStyle={{ background: "#ffffff" }}
+              bodyStyle={{ background: "#fafafa" }}
+            >
+              Inner Card content
+            </Card> */}
+            <br />
+            <div
+              style={{
+                position: "absolute",
+                // top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+              }}
+            >
+              {/* 4% margin? */}
+              <div style={{ margin: "24px" }}>
+                <Card.Meta
+                  // style={{ position: "absolute", bottom: 0 }}
+                  title={
+                    <TextArea
+                      placeholder="Say hello..."
+                      allowClear
+                      onChange={onChange}
+                    />
+                  }
+                />
+              </div>
+            </div>
+          </Card>
+          {/* <Footer> */}
+          {/* <TextArea placeholder="Say hello..." allowClear onChange={onChange} /> */}
+          {/* </Footer> */}
+          {/* <ChatHookFinal activeUser={user} /> */}
         </Sider>
       </Layout>
       <Footer style={{ margin: "24 24" }}>

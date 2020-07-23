@@ -30,6 +30,7 @@ const settings = {
   speed: 9000,
   // autoplaySpeed: 9000,
   cssEase: "linear",
+  // float: "right",
 };
 
 export default function Sample() {
@@ -71,7 +72,14 @@ export default function Sample() {
           </Menu>
         </Header>
 
-        <Layout style={{ marginTop: "24px", padding: "0 24px 24px" }}>
+        <Layout
+          style={{
+            marginTop: "24px",
+            padding: "0 24px 24px",
+            marginLeft: "auto",
+            order: 2,
+          }}
+        >
           <Breadcrumb style={{ margin: "16px 0" }}>
             {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>
@@ -80,11 +88,15 @@ export default function Sample() {
           <Content
             className="site-layout-background"
             style={{
-              // padding: 24,
-              // marginRight: 12,
+              padding: 24,
+              marginRight: 12,
+
               minHeight: 450,
               // borderStyle: "solid",
               background: "rgba(255, 255, 255, 0.2)",
+              // float: "right",
+              position: "flex",
+              // justifyContent: "space-between",
             }}
           >
             {/* Video 1920 x 1080px */}
@@ -151,6 +163,8 @@ export default function Sample() {
               // padding: 24,
               margin: 0,
               minHeight: 150,
+              // display: "flex",
+              // justifyContent: "space-between",
               // borderStyle: "solid",
             }}
           >

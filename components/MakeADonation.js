@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Input, Radio } from "antd";
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel, title }) => {
   const [form] = Form.useForm();
   return (
     <Modal
       visible={visible}
-      title="Make A Donation"
+      title={title}
       okText="Create"
       cancelText="Cancel"
       onCancel={onCancel}
@@ -68,7 +68,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   );
 };
 
-const CollectionsPage = () => {
+const CollectionsPage = (props) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (values) => {
@@ -83,12 +83,13 @@ const CollectionsPage = () => {
           setVisible(true);
           console.log("sends to a donate page?");
         }}
-        style={{ marginTop: 24 }}
+        // style={{ marginTop: 24 }}
         size="large"
       >
-        Make a donation
+        {props.title}
       </Button>
       <CollectionCreateForm
+        {...props}
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {

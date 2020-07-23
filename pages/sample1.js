@@ -2,8 +2,18 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import ChatHookFinal from "../components/ChatHookFinal";
 import Player from "../components/Player";
-import { Layout, Menu, Breadcrumb, Carousel, Button } from "antd";
+import {
+  Layout,
+  Menu,
+  Breadcrumb,
+  Carousel,
+  Button,
+  Card,
+  Row,
+  Col,
+} from "antd";
 import CollectionsPage from "../components/MakeADonation";
+import LoginButton from "../components/LoginButton";
 import {
   // UserOutlined,
   // LaptopOutlined,
@@ -70,25 +80,6 @@ export default function Sample() {
   };
   const [user, setUser] = useState("Anonymous");
 
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-
-  //   setSettings({
-  //     dots: true,
-  //     infinite: true,
-  //     slidesToShow: 3,
-  //     slidesToScroll: 1,
-  //     autoplay: true,
-  //     speed: 9000,
-  //     // autoplaySpeed: 9000,
-  //     cssEase: "linear",
-
-  //     nextArrow: <SampleNextArrow  />,
-  //     prevArrow: <SamplePrevArrow />,
-  //     rtl: true,
-  //   });
-  // }, []);
-
   return (
     <Layout>
       <Header className="header">
@@ -102,7 +93,7 @@ export default function Sample() {
           {/* <Menu.Item key="1">nav 1</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item> */}
           <Menu.Item key="3">
-            <CollectionsPage title={"Login"} />
+            <LoginButton title={"Login"} />
           </Menu.Item>
         </Menu>
       </Header>
@@ -122,6 +113,7 @@ export default function Sample() {
         >
           <Player {...videoJsOptions} />
           <br />
+
           <CollectionsPage title={"Make a Donation"} />
         </Content>
         <Sider width={450} className="site-layout-background">

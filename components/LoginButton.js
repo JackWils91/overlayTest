@@ -68,7 +68,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, title }) => {
   );
 };
 
-const CollectionsPage = (props) => {
+const LoginButton = (props) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (values) => {
@@ -76,24 +76,15 @@ const CollectionsPage = (props) => {
     setVisible(false);
   };
   return (
-    <>
-      {/* <div style={{ all: "inherit" }}> */}
+    <div>
       <Button
         type="primary"
-        size="large"
-        style={{
-          width: "75%",
-          fontSize: "150%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "green",
-          borderColor: "green",
-        }}
         onClick={() => {
           setVisible(true);
           console.log("sends to a donate page?");
         }}
+        // style={{ marginTop: 24 }}
+        size="large"
       >
         {props.title}
       </Button>
@@ -105,9 +96,8 @@ const CollectionsPage = (props) => {
           setVisible(false);
         }}
       />
-      {/* </div> */}
-    </>
+    </div>
   );
 };
 
-export default CollectionsPage;
+export default LoginButton;

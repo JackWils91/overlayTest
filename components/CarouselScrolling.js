@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Carousel } from "antd";
+import { Carousel, Avatar, Badge } from "antd";
 
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 
 const CarouselScrolling = (props) => {
   function SampleNextArrow(props) {
@@ -58,16 +58,96 @@ const CarouselScrolling = (props) => {
   return (
     <Carousel dots={false} arrows {...settings}>
       <div>
+        <span className="avatar-item">
+          <Badge count={"$10k"}>
+            <Avatar
+              shape="square"
+              size={94}
+              icon={
+                <img
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  src="/jpeg1.jpeg"
+                  alt="jpeg1"
+                />
+              }
+            />
+          </Badge>
+        </span>
         <h3>1</h3>
       </div>
       <div>
+        <span className="avatar-item">
+          <Badge count={"$20k"}>
+            <Avatar
+              shape="square"
+              size={94}
+              icon={
+                <img
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  src="/png1.png"
+                  alt="png1"
+                />
+              }
+            />
+          </Badge>
+        </span>
         <h3>2</h3>
       </div>
       <div>
+        <span className="avatar-item">
+          <Badge count={"$25k"}>
+            <Avatar
+              shape="square"
+              size={94}
+              icon={
+                <img
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  src="/png2.png"
+                  alt="png2"
+                />
+              }
+            />
+          </Badge>
+        </span>
         <h3>3</h3>
       </div>
       <div>
+        <span className="avatar-item">
+          <Badge count={"$35k"}>
+            <Avatar
+              shape="square"
+              size={94}
+              icon={
+                <img
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  src="/png3.png"
+                  alt="png3"
+                />
+              }
+            />
+          </Badge>
+        </span>
         <h3>4</h3>
+      </div>
+
+      <div>
+        <span className="avatar-item">
+          <Badge count={"$55k"}>
+            <Avatar
+              shape="square"
+              size={94}
+              icon={
+                <img
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  src="/png4.png"
+                  alt="png4"
+                />
+              }
+            />
+          </Badge>
+        </span>
+
+        <h3>5</h3>
       </div>
     </Carousel>
   );

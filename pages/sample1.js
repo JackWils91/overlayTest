@@ -131,18 +131,24 @@ export default function Sample() {
             title={user}
             style={{ boxSizing: "border-box", height: "100%" }}
           >
-            <Card.Grid hoverable={false} style={gridStyle}>
+            {/* <Card.Grid hoverable={false} style={gridStyle}>
               Content
             </Card.Grid>
-            <Card.Grid style={gridStyle}>Content</Card.Grid>
-            {/* <Card
+            <Card.Grid style={gridStyle}>Content</Card.Grid> */}
+            <Card
               type="inner"
               size="small"
               bordered={false}
-              // title="Inner Card title"
-              extra={<a href="#">{`${user} 1`}</a>}
-              headStyle={{ background: "#ffffff" }}
-              bodyStyle={{ background: "#fafafa", maxWidth: "70%" }}
+              title={<a href="#">{`${user} 1`}</a>}
+              // extra={<a href="#">{`${user} 1`}</a>}
+              headStyle={{ background: "#ffffff", borderBottom: 0 }}
+              bodyStyle={{
+                display: "inline-block",
+                background: "#f0f2f5",
+                maxWidth: "70%",
+                textAlign: "left",
+                // float: "left",
+              }}
             >
               Inner Card content
             </Card>
@@ -153,11 +159,16 @@ export default function Sample() {
               bordered={false}
               // title="Inner Card title"
               extra={<a href="#">{`${user} 2`}</a>}
-              headStyle={{ background: "#ffffff" }}
-              bodyStyle={{ background: "#fafafa" }}
+              headStyle={{ background: "#ffffff", borderBottom: 0 }}
+              bodyStyle={{
+                background: "#f0f2f5",
+                maxWidth: "70%",
+                textAlign: "right",
+                float: "right",
+              }}
             >
               Inner Card content
-            </Card> */}
+            </Card>
             <br />
             <div
               style={{

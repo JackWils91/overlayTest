@@ -92,7 +92,9 @@ const ChatHookFinal = (props) => {
               Math.ceil(
                 (chat.timestamp - previousChat.timestamp) / (1000 * 60)
               ) > 1;
-
+            console.log(
+              `logic-->isFirst ${isFirst} inSequence ${!inSequence} hasDelay ${hasDelay}`
+            );
             return (
               <Fragment key={index}>
                 {(isFirst || !inSequence || hasDelay) && (
@@ -103,7 +105,7 @@ const ChatHookFinal = (props) => {
                     {/* <span className="d-block" style={{ fontSize: "1.6rem" }}>
                       {String.fromCodePoint(...mood)}
                     </span> */}
-                    <span>{chat.user || "Anonymous"}</span>
+                    <span>{"Anonymous"}</span>
                   </div>
                 )}
 

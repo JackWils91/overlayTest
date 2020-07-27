@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import ChatHookFinal from "../components/ChatHookFinal";
 import Player from "../components/Player";
@@ -24,6 +24,7 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import CarouselScrolling from "../components/CarouselScrolling";
+import ChatBox from "../components/ChatBox";
 
 // const Chat1 = dynamic(() => import("../components/Chat1"), {
 //   ssr: false,
@@ -51,12 +52,45 @@ const { Header, Content, Footer, Sider } = Layout;
 //   rtl: true,
 // };
 
-export default function Sample() {
+// function useDimensions(targetRef) {
+//   const getDimensions = () => {
+//     return {
+//       width: targetRef.current ? targetRef.current.offsetWidth : 0,
+//       height: targetRef.current ? targetRef.current.offsetHeight : 0,
+//     };
+//   };
+
+//   const [dimensions, setDimensions] = useState(getDimensions);
+
+//   const handleResize = () => {
+//     setDimensions(getDimensions());
+//   };
+
+//   useEffect(() => {
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   useLayoutEffect(() => {
+//     handleResize();
+//   }, []);
+//   return dimensions;
+// }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      user: "Guest" + " " + Math.floor(Math.random() * Math.floor(100)),
+    },
+  };
+}
+
+export default function Sample({ user }) {
   console.log("sample rendering?");
   const randomVariable = 1;
   const videoJsOptions = {
     techOrder: ["youtube"],
-    autoplay: true,
+    autoplay: false,
     controls: true,
     sources: [
       {
@@ -80,16 +114,26 @@ export default function Sample() {
     // top: "0%",
     // right: "0%",
   };
-  const [user, setUser] = useState("Guest");
+  // function getRandomInt(max) {
+  //   return Math.floor(Math.random() * Math.floor(max));
+  // }
 
-  const onChange = (e) => {
-    console.log("test box", e.target.value);
-  };
+  // const [user, setUser] = useState(
+  //   "Guest" + " " + Math.floor(Math.random() * Math.floor(100))
+  // );
+  // // const [user, setUser] = useState(`Guest 1`);
+  // console.log("user generated-->", user);
 
   const gridStyle = {
     width: "25%",
     textAlign: "center",
   };
+
+  // const targetRef = useRef();
+  // console.log("height-->", targetRef);
+  // const size = useDimensions(targetRef);
+  // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   return (
     <Layout>
       <Header className="header">
@@ -126,78 +170,21 @@ export default function Sample() {
 
           <CollectionsPage title={"Make a Donation"} />
         </Content>
+
         <Sider width={450} className="site-layout-background">
-          <Card
-            title={user}
-            style={{ boxSizing: "border-box", height: "100%" }}
-          >
-            {/* <Card.Grid hoverable={false} style={gridStyle}>
-              Content
-            </Card.Grid>
-            <Card.Grid style={gridStyle}>Content</Card.Grid> */}
-            <Card
-              type="inner"
-              size="small"
-              bordered={false}
-              title={<a href="#">{`${user} 1`}</a>}
-              // extra={<a href="#">{`${user} 1`}</a>}
-              headStyle={{ background: "#ffffff", borderBottom: 0 }}
-              bodyStyle={{
-                display: "inline-block",
-                background: "#f0f2f5",
-                maxWidth: "70%",
-                textAlign: "left",
-                // float: "left",
-              }}
-            >
-              Inner Card content
-            </Card>
-            <Card
-              style={{ marginTop: 16 }}
-              type="inner"
-              size="small"
-              bordered={false}
-              // title="Inner Card title"
-              extra={<a href="#">{`${user} 2`}</a>}
-              headStyle={{ background: "#ffffff", borderBottom: 0 }}
-              bodyStyle={{
-                background: "#f0f2f5",
-                maxWidth: "70%",
-                textAlign: "right",
-                float: "right",
-              }}
-            >
-              Inner Card content
-            </Card>
-            <br />
-            <div
-              style={{
-                position: "absolute",
-                // top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-              }}
-            >
-              {/* 4% margin? */}
-              <div style={{ margin: "24px" }}>
-                <Card.Meta
-                  // style={{ position: "absolute", bottom: 0 }}
-                  title={
-                    <TextArea
-                      placeholder="Say hello..."
-                      allowClear
-                      onChange={onChange}
-                    />
-                  }
-                />
-              </div>
-            </div>
-          </Card>
+          {/* <div ref={targetRef}> */}
+          {user && (
+            <ChatBox
+              // dimensions={size}
+              // height={height}
+              activeUser={user} /*user={user}*/
+            />
+          )}
           {/* <Footer> */}
           {/* <TextArea placeholder="Say hello..." allowClear onChange={onChange} /> */}
           {/* </Footer> */}
           {/* <ChatHookFinal activeUser={user} /> */}
+          {/* </div> */}
         </Sider>
       </Layout>
       <Footer style={{ margin: "24 24" }}>

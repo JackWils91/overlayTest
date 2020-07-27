@@ -41,6 +41,7 @@ export default (req, res) => {
         const chat = { user, message, timestamp };
 
         chatHistory.messages.push(chat);
+        console.log("messages array in message-->", chatHistory);
         pusher.trigger("chat-room", "new-message", { chat });
         res.status(200).json({ res: "message triggered on channel" });
       } catch (e) {

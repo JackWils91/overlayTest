@@ -64,7 +64,7 @@ const { Header, Content, Footer, Sider } = Layout;
 //   return dimensions;
 // }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
       user: "Guest" + " " + Math.floor(Math.random() * Math.floor(100)),

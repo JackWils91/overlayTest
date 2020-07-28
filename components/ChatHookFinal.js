@@ -105,7 +105,7 @@ const ChatHookFinal = (props) => {
                     {/* <span className="d-block" style={{ fontSize: "1.6rem" }}>
                       {String.fromCodePoint(...mood)}
                     </span> */}
-                    <span>{"Anonymous"}</span>
+                    <span>{chat.user || "Anonymous"}</span>
                   </div>
                 )}
 

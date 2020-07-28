@@ -16,6 +16,7 @@ import {
 const { TextArea } = Input;
 import CollectionsPage from "../components/MakeADonation";
 import LoginButton from "../components/LoginButton";
+
 import {
   // UserOutlined,
   // LaptopOutlined,
@@ -25,6 +26,15 @@ import {
 } from "@ant-design/icons";
 import CarouselScrolling from "../components/CarouselScrolling";
 import ChatBox from "../components/ChatBox";
+import { fetchPostJSON } from "../utils/routing";
+const messageRoute =
+  process.env.NODE_ENV === "production"
+    ? "https://charity-chachacha.herokuapp.com/message"
+    : "/api/pusher/message";
+const messagesRoute =
+  process.env.NODE_ENV === "production"
+    ? "https://charity-chachacha.herokuapp.com/messages"
+    : "/api/pusher/messages";
 
 // const Chat1 = dynamic(() => import("../components/Chat1"), {
 //   ssr: false,
@@ -133,7 +143,26 @@ export default function Sample({ user }) {
   // console.log("height-->", targetRef);
   // const size = useDimensions(targetRef);
   // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const handleKeyUp = (evt) => {
+    const value = evt.target.value;
 
+    console.log("valur submitted-->", value);
+
+    if (evt.keyCode === 13 && !evt.shiftKey) {
+      // const { activeUser: user } = props;
+      const chat = { user, message: value, timestamp: +new Date() };
+
+      evt.target.value = "";
+      //   axios.post("/message", chat);
+      fetchPostJSON(messageRoute, chat);
+
+      // const heightElement = document.getElementsByClassName(
+      //   "ant-layout-sider"
+      // )[0].offsetHeight;
+
+      // setHeight(heightElement * 0.7);
+    }
+  };
   return (
     <Layout>
       <Header className="header">
@@ -174,11 +203,21 @@ export default function Sample({ user }) {
         <Sider width={450} className="site-layout-background">
           {/* <div ref={targetRef}> */}
           {user && (
-            <ChatBox
-              // dimensions={size}
-              // height={height}
-              activeUser={user} /*user={user}*/
-            />
+            <>
+              <ChatBox
+                // dimensions={size}
+                // height={height}
+                activeUser={user} /*user={user}*/
+              />
+              <div style={{ padding: "20px" }}>
+                <TextArea
+                  placeholder="Say hello..."
+                  allowClear
+                  onKeyUp={handleKeyUp}
+                  // onChange={onChange}
+                />
+              </div>
+            </>
           )}
           {/* <Footer> */}
           {/* <TextArea placeholder="Say hello..." allowClear onChange={onChange} /> */}

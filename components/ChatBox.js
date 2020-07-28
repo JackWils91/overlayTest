@@ -5,7 +5,7 @@ import React, {
   useRef,
   useLayoutEffect,
 } from "react";
-import { Card, Input } from "antd";
+import { Card, Input, Affix } from "antd";
 const { TextArea } = Input;
 
 import Pusher from "pusher-js";
@@ -123,6 +123,8 @@ const ChatBox = (props) => {
   console.log("size-->", props);
 
   const [height, setHeight] = useState();
+
+  const scrollToBottom = useRef();
   useEffect(() => {
     //offsetHeight
     // console.log(
@@ -143,7 +145,28 @@ const ChatBox = (props) => {
     setHeight(heightElement);
   }, []);
 
+  // scrollToBottom.current &&
+  //   scrollToBottom.current.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "end",
+  //     inline: "nearest",
+  //   });
+
   console.log("the height-->", height);
+  console.log("scroll to bottom-->", scrollToBottom);
+
+  // const [renderCount, setRenderCount] = useState();
+  const [container, setContainer] = useState(null);
+
+  useEffect(() => {
+    scrollToBottom.current &&
+      scrollToBottom.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+  }, [chats]);
+
   return (
     props.activeUser && (
       <>
@@ -151,12 +174,13 @@ const ChatBox = (props) => {
           title={props.activeUser}
           style={{
             // boxSizing: "border-box",
-            // height: "100%",
-            maxHeight: height,
+            height: "82%",
+            // maxHeight: height,
             // position: "fixed",
           }}
           bodyStyle={{
-            maxHeight: height,
+            // maxHeight: height, <-- from window port
+            maxHeight: 350,
             overflow: "auto",
             padding: 0,
           }}
@@ -165,43 +189,65 @@ const ChatBox = (props) => {
       Content
     </Card.Grid>
     <Card.Grid style={gridStyle}>Content</Card.Grid> */}
-          {chats.map((chat, index) => {
-            const previous = Math.max(0, index - 1);
-            const previousChat = chats[previous];
-            const position = chat.user === props.activeUser ? "right" : "left";
+          {/* <div className="scrollable-container" ref={setContainer}>
+            <Affix offsetBottom={-20} target={() => container}> */}
+          <div ref={scrollToBottom}>
+            {chats.map((chat, index) => {
+              const previous = Math.max(0, index - 1);
+              const previousChat = chats[previous];
+              const position =
+                chat.user === props.activeUser ? "right" : "left";
 
-            const isFirst = previous === index;
-            const inSequence = chat.user === previousChat.user;
-            const hasDelay =
-              Math.ceil(
-                (chat.timestamp - previousChat.timestamp) / (1000 * 60)
-              ) > 1;
-            console.log("each chat-->", chat);
-            console.log(
-              `logic-->isFirst ${isFirst} inSequence ${!inSequence} hasDelay ${hasDelay}`
-            );
+              const isFirst = previous === index;
+              const inSequence = chat.user === previousChat.user;
+              const hasDelay =
+                Math.ceil(
+                  (chat.timestamp - previousChat.timestamp) / (1000 * 60)
+                ) > 1;
+              console.log("each chat-->", chat);
+              console.log(
+                `logic-->isFirst ${isFirst} inSequence ${!inSequence} hasDelay ${hasDelay}`
+              );
 
-            return (
-              <Fragment key={index}>
-                {/* {(isFirst || !inSequence || hasDelay) && ( */}
+              const heightElement = document.getElementsByClassName(
+                "ant-layout-sider"
+              )[0].offsetHeight;
 
-                <Card
-                  type={stylingMessage[position].type}
-                  size={stylingMessage[position].size}
-                  bordered={stylingMessage[position].bordered}
-                  title={position === "left" ? <a href="#">{chat.user}</a> : ""}
-                  extra={
-                    position === "right" ? <a href="#">{chat.user}</a> : ""
-                  }
-                  // headStyle={stylingMessage[position].headStyle}
-                  // bodyStyle={stylingMessage[position].bodyStyle}
-                >
-                  {chat.message}
-                </Card>
+              // setHeight(heightElement * 0.7);
 
-                {/* )} */}
+              // scrollToBottom.current &&
+              //   scrollToBottom.current.scrollIntoView({
+              //     behavior: "smooth",
+              //     block: "end",
+              //     inline: "nearest",
+              //   });
+              // scrollToBottom.current &&
+              //   scrollToBottom.current.scrollIntoView(false);
+              // scrollToBottom.current && window.scrollTo(1000, 1000);
 
-                {/* 
+              return (
+                <Fragment key={index}>
+                  {/* {(isFirst || !inSequence || hasDelay) && ( */}
+                  {/* <div ref={scrollToBottom}> */}
+                  <Card
+                    type={stylingMessage[position].type}
+                    size={stylingMessage[position].size}
+                    bordered={stylingMessage[position].bordered}
+                    title={
+                      position === "left" ? <a href="#">{chat.user}</a> : ""
+                    }
+                    extra={
+                      position === "right" ? <a href="#">{chat.user}</a> : ""
+                    }
+                    // headStyle={stylingMessage[position].headStyle}
+                    // bodyStyle={stylingMessage[position].bodyStyle}
+                  >
+                    {chat.message}
+                  </Card>
+                  {/* </div> */}
+                  {/* )} */}
+
+                  {/* 
               RIGHT POSITIONING
               <Card
                 style={{ marginTop: 16 }}
@@ -221,13 +267,16 @@ const ChatBox = (props) => {
                 Inner Card content
               </Card> */}
 
-                {/* <ChatMessageHookFinal
+                  {/* <ChatMessageHookFinal
                 message={chat.message}
                 position={position}
               /> */}
-              </Fragment>
-            );
-          })}
+                </Fragment>
+              );
+            })}
+          </div>
+          {/* </Affix>
+          </div> */}
           {/* <Card
           type="inner"
           size="small"
@@ -263,8 +312,9 @@ const ChatBox = (props) => {
           Inner Card content
         </Card> */}
         </Card>
+
         {/* <br /> */}
-        <div
+        {/* <div
           style={{
             position: "absolute",
             // top: 0,
@@ -272,23 +322,17 @@ const ChatBox = (props) => {
             left: 0,
             right: 0,
           }}
-        >
-          {/* 4% margin? */}
-          <div style={{ padding: "20px" }}>
-            {/* <Card.Meta
-              // style={{ position: "absolute", bottom: 0 }}
-              title={
-              
-              }
-            /> */}
+        > */}
+        {/* 4% margin? */}
+        {/* <div style={{ padding: "20px" }}>
             <TextArea
               placeholder="Say hello..."
               allowClear
               onKeyUp={handleKeyUp}
               // onChange={onChange}
             />
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </>
     )
   );

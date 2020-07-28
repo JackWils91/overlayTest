@@ -5,7 +5,7 @@ import React, {
   useRef,
   useLayoutEffect,
 } from "react";
-import { Card, Input, Affix } from "antd";
+import { Card, Input, Row, Col } from "antd";
 const { TextArea } = Input;
 
 import Pusher from "pusher-js";
@@ -96,12 +96,13 @@ const ChatBox = (props) => {
       // extra: "",
       headStyle: { background: "#ffffff", borderBottom: 0 },
       bodyStyle: {
-        display: "inline-block",
-        background: "#f0f2f5",
-        maxWidth: "70%",
-        textAlign: "left",
+        // display: "inline-block",
+        // background: "#f0f2f5",
+        // maxWidth: "70%",
+        // textAlign: "left",
         // float: "left",
       },
+      position: "start",
     },
     right: {
       type: "inner",
@@ -111,11 +112,15 @@ const ChatBox = (props) => {
       // extra: <a href="#">{`${user} 1`}</a>,
       headStyle: { background: "#ffffff", borderBottom: 0 },
       bodyStyle: {
-        background: "#f0f2f5",
-        maxWidth: "70%",
+        // display: "inline-block",
+        // background: "#f0f2f5",
+        // maxWidth: "70%",
         textAlign: "right",
-        float: "right",
+        paddingRight: 0,
+        marginRight: 12,
+        // float: "right",
       },
+      position: "end",
     },
   };
   console.log("chats-->", chats);
@@ -126,19 +131,6 @@ const ChatBox = (props) => {
 
   const scrollToBottom = useRef();
   useEffect(() => {
-    //offsetHeight
-    // console.log(
-    //   "GetsElementByClass",
-    //   document.getElementsByClassName("ant-layout-sider"),
-    //   document.getElementsByClassName("ant-layout-sider-children")[0],
-    //   // document.getElementsByClassName("ant-layout-sider-children")[0]
-    //   //   .offsetHeight,
-    //   document.getElementsByClassName("ant-layout-sider-children")[0]
-    //     .clientHeight,
-    //   document.getElementsByClassName("ant-layout-sider-children")[0]
-    //     .scrollHeight
-    // );
-
     const heightElement = document.getElementsByClassName("ant-layout-sider")[0]
       .offsetHeight;
 
@@ -175,6 +167,7 @@ const ChatBox = (props) => {
           style={{
             // boxSizing: "border-box",
             height: "82%",
+            // display: "flex",
             // maxHeight: height,
             // position: "fixed",
           }}
@@ -185,12 +178,6 @@ const ChatBox = (props) => {
             padding: 0,
           }}
         >
-          {/* <Card.Grid hoverable={false} style={gridStyle}>
-      Content
-    </Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid> */}
-          {/* <div className="scrollable-container" ref={setContainer}>
-            <Affix offsetBottom={-20} target={() => container}> */}
           <div ref={scrollToBottom}>
             {chats.map((chat, index) => {
               const previous = Math.max(0, index - 1);
@@ -209,130 +196,52 @@ const ChatBox = (props) => {
                 `logic-->isFirst ${isFirst} inSequence ${!inSequence} hasDelay ${hasDelay}`
               );
 
-              const heightElement = document.getElementsByClassName(
-                "ant-layout-sider"
-              )[0].offsetHeight;
+              // const heightElement = document.getElementsByClassName(
+              //   "ant-layout-sider"
+              // )[0].offsetHeight;
 
               // setHeight(heightElement * 0.7);
-
-              // scrollToBottom.current &&
-              //   scrollToBottom.current.scrollIntoView({
-              //     behavior: "smooth",
-              //     block: "end",
-              //     inline: "nearest",
-              //   });
-              // scrollToBottom.current &&
-              //   scrollToBottom.current.scrollIntoView(false);
-              // scrollToBottom.current && window.scrollTo(1000, 1000);
 
               return (
                 <Fragment key={index}>
                   {/* {(isFirst || !inSequence || hasDelay) && ( */}
                   {/* <div ref={scrollToBottom}> */}
-                  <Card
-                    type={stylingMessage[position].type}
-                    size={stylingMessage[position].size}
-                    bordered={stylingMessage[position].bordered}
-                    title={
-                      position === "left" ? <a href="#">{chat.user}</a> : ""
-                    }
-                    extra={
-                      position === "right" ? <a href="#">{chat.user}</a> : ""
-                    }
-                    // headStyle={stylingMessage[position].headStyle}
-                    // bodyStyle={stylingMessage[position].bodyStyle}
-                  >
-                    {chat.message}
-                  </Card>
-                  {/* </div> */}
-                  {/* )} */}
-
-                  {/* 
-              RIGHT POSITIONING
-              <Card
-                style={{ marginTop: 16 }}
-                type="inner"
-                size="small"
-                bordered={false}
-                // title="Inner Card title"
-                extra={<a href="#">{`${user} 2`}</a>}
-                headStyle={{ background: "#ffffff", borderBottom: 0 }}
-                bodyStyle={{
-                  background: "#f0f2f5",
-                  maxWidth: "70%",
-                  textAlign: "right",
-                  float: "right",
-                }}
-              >
-                Inner Card content
-              </Card> */}
-
-                  {/* <ChatMessageHookFinal
-                message={chat.message}
-                position={position}
-              /> */}
+                  <div className="site-card-wrapper">
+                    <Row justify={stylingMessage[position].position}>
+                      <Col span={12}>
+                        <Card
+                          type={stylingMessage[position].type}
+                          size={stylingMessage[position].size}
+                          bordered={stylingMessage[position].bordered}
+                          title={
+                            position === "left" ? (
+                              <a href="#">{chat.user}</a>
+                            ) : (
+                              ""
+                            )
+                          }
+                          extra={
+                            position === "right" ? (
+                              <a href="#">{chat.user}</a>
+                            ) : (
+                              ""
+                            )
+                          }
+                          headStyle={stylingMessage[position].headStyle}
+                          bodyStyle={stylingMessage[position].bodyStyle}
+                        >
+                          <span style={{ background: "#f0f2f5", padding: 7 }}>
+                            {chat.message}
+                          </span>
+                        </Card>
+                      </Col>
+                    </Row>
+                  </div>
                 </Fragment>
               );
             })}
           </div>
-          {/* </Affix>
-          </div> */}
-          {/* <Card
-          type="inner"
-          size="small"
-          bordered={false}
-          title={<a href="#">{`${user} 1`}</a>}
-          // extra={<a href="#">{`${user} 1`}</a>}
-          headStyle={{ background: "#ffffff", borderBottom: 0 }}
-          bodyStyle={{
-            display: "inline-block",
-            background: "#f0f2f5",
-            maxWidth: "70%",
-            textAlign: "left",
-            // float: "left",
-          }}
-        >
-          Inner Card content
         </Card>
-        <Card
-          style={{ marginTop: 16 }}
-          type="inner"
-          size="small"
-          bordered={false}
-          // title="Inner Card title"
-          extra={<a href="#">{`${user} 2`}</a>}
-          headStyle={{ background: "#ffffff", borderBottom: 0 }}
-          bodyStyle={{
-            background: "#f0f2f5",
-            maxWidth: "70%",
-            textAlign: "right",
-            float: "right",
-          }}
-        >
-          Inner Card content
-        </Card> */}
-        </Card>
-
-        {/* <br /> */}
-        {/* <div
-          style={{
-            position: "absolute",
-            // top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-          }}
-        > */}
-        {/* 4% margin? */}
-        {/* <div style={{ padding: "20px" }}>
-            <TextArea
-              placeholder="Say hello..."
-              allowClear
-              onKeyUp={handleKeyUp}
-              // onChange={onChange}
-            />
-          </div> */}
-        {/* </div> */}
       </>
     )
   );

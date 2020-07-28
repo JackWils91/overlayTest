@@ -36,31 +36,8 @@ const messagesRoute =
     ? "https://charity-chachacha.herokuapp.com/messages"
     : "/api/pusher/messages";
 
-// const Chat1 = dynamic(() => import("../components/Chat1"), {
-//   ssr: false,
-// });
-
-// const Chat3 = dynamic(() => import("../components/Chat3"), {
-//   ssr: false,
-// });
-
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
-
-// const settings = {
-//   dots: true,
-//   infinite: true,
-//   slidesToShow: 3,
-//   slidesToScroll: 1,
-//   autoplay: true,
-//   speed: 9000,
-//   // autoplaySpeed: 9000,
-//   cssEase: "linear",
-
-//   nextArrow: <SampleNextArrow />,
-//   prevArrow: <SamplePrevArrow />,
-//   rtl: true,
-// };
 
 // function useDimensions(targetRef) {
 //   const getDimensions = () => {
@@ -124,25 +101,12 @@ export default function Sample({ user }) {
     // top: "0%",
     // right: "0%",
   };
-  // function getRandomInt(max) {
-  //   return Math.floor(Math.random() * Math.floor(max));
-  // }
-
-  // const [user, setUser] = useState(
-  //   "Guest" + " " + Math.floor(Math.random() * Math.floor(100))
-  // );
-  // // const [user, setUser] = useState(`Guest 1`);
-  // console.log("user generated-->", user);
 
   const gridStyle = {
     width: "25%",
     textAlign: "center",
   };
 
-  // const targetRef = useRef();
-  // console.log("height-->", targetRef);
-  // const size = useDimensions(targetRef);
-  // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const handleKeyUp = (evt) => {
     const value = evt.target.value;
 
@@ -219,11 +183,6 @@ export default function Sample({ user }) {
               </div>
             </>
           )}
-          {/* <Footer> */}
-          {/* <TextArea placeholder="Say hello..." allowClear onChange={onChange} /> */}
-          {/* </Footer> */}
-          {/* <ChatHookFinal activeUser={user} /> */}
-          {/* </div> */}
         </Sider>
       </Layout>
       <Footer style={{ margin: "24 24" }}>

@@ -206,7 +206,7 @@ const ChatBox = (props) => {
                 <Fragment key={index}>
                   {/* {(isFirst || !inSequence || hasDelay) && ( */}
                   {/* <div ref={scrollToBottom}> */}
-                  <div className="site-card-wrapper">
+                  {/* <div className="site-card-wrapper">
                     <Row justify={stylingMessage[position].position}>
                       <Col span={12}>
                         <Card
@@ -229,14 +229,25 @@ const ChatBox = (props) => {
                           }
                           headStyle={stylingMessage[position].headStyle}
                           bodyStyle={stylingMessage[position].bodyStyle}
-                        >
-                          <span style={{ background: "#f0f2f5", padding: 7 }}>
-                            {chat.message}
-                          </span>
-                        </Card>
+                        > 
+                  <span style={{ background: "#f0f2f5", padding: 7 }}>
+                    {chat.message}
+                  </span>
+               </Card>
                       </Col>
                     </Row>
-                  </div>
+                  </div> */}
+                  <p
+                    style={{
+                      marginTop: 3,
+                      paddingTop: 1,
+                      paddingLeft: 7,
+                      paddingRight: 7,
+                    }}
+                  >
+                    <strong>{`${chat.user}: `}</strong>
+                    {chat.message}
+                  </p>
                 </Fragment>
               );
             })}

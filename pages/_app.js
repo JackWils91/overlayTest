@@ -7,6 +7,7 @@ import "../styles/canvas.css";
 import "../styles/carousel.css";
 import "react-chat-widget/lib/styles.css";
 import "react-chat-elements/dist/main.css";
+import "emoji-mart/css/emoji-mart.css";
 
 export default function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

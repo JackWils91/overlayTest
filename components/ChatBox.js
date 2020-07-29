@@ -245,7 +245,7 @@ const ChatBox = (props) => {
                       paddingRight: 7,
                     }}
                   >
-                    <strong>{`${chat.user}: `}</strong>
+                    {chat.timestamp} <strong>{`${chat.user}: `}</strong>
                     {chat.message}
                   </p>
                 </Fragment>

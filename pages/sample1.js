@@ -17,6 +17,8 @@ const { TextArea } = Input;
 import CollectionsPage from "../components/MakeADonation";
 import LoginButton from "../components/LoginButton";
 
+import { Picker } from "emoji-mart";
+
 import {
   // UserOutlined,
   // LaptopOutlined,
@@ -26,15 +28,7 @@ import {
 } from "@ant-design/icons";
 import CarouselScrolling from "../components/CarouselScrolling";
 import ChatBox from "../components/ChatBox";
-import { fetchPostJSON } from "../utils/routing";
-const messageRoute =
-  process.env.NODE_ENV === "production"
-    ? "https://charity-chachacha.herokuapp.com/message"
-    : "/api/pusher/message";
-const messagesRoute =
-  process.env.NODE_ENV === "production"
-    ? "https://charity-chachacha.herokuapp.com/messages"
-    : "/api/pusher/messages";
+import ChatComponent from "../components/ChatComponent";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -73,7 +67,10 @@ export async function getServerSideProps() {
 }
 
 export default function Sample({ user }) {
+  const [emoji, setEmoji] = useState();
+
   console.log("sample rendering?");
+
   const randomVariable = 1;
   const videoJsOptions = {
     techOrder: ["youtube"],
@@ -107,26 +104,6 @@ export default function Sample({ user }) {
     textAlign: "center",
   };
 
-  const handleKeyUp = (evt) => {
-    const value = evt.target.value;
-
-    console.log("valur submitted-->", value);
-
-    if (evt.keyCode === 13 && !evt.shiftKey) {
-      // const { activeUser: user } = props;
-      const chat = { user, message: value, timestamp: +new Date() };
-
-      evt.target.value = "";
-      //   axios.post("/message", chat);
-      fetchPostJSON(messageRoute, chat);
-
-      // const heightElement = document.getElementsByClassName(
-      //   "ant-layout-sider"
-      // )[0].offsetHeight;
-
-      // setHeight(heightElement * 0.7);
-    }
-  };
   return (
     <Layout>
       <Header className="header">
@@ -166,28 +143,32 @@ export default function Sample({ user }) {
 
         <Sider width={450} className="site-layout-background">
           {/* <div ref={targetRef}> */}
-          {user && (
-            <>
-              <ChatBox
-                // dimensions={size}
-                // height={height}
-                activeUser={user} /*user={user}*/
-              />
-              <div style={{ padding: "20px" }}>
-                <TextArea
-                  placeholder="Say hello..."
-                  allowClear
-                  onKeyUp={handleKeyUp}
-                  // onChange={onChange}
-                />
-              </div>
-            </>
-          )}
+
+          <ChatComponent user={user} />
         </Sider>
       </Layout>
       <Footer style={{ margin: "24 24" }}>
-        <CarouselScrolling />
+        <CarouselScrolling style={{ zIndex: "-1" }} />
       </Footer>
     </Layout>
   );
 }
+
+// {user && (
+//   <>
+//     <ChatBox
+//       // dimensions={size}
+//       // height={height}
+//       activeUser={user} /*user={user}*/
+//     />
+
+//     <div style={{ padding: "20px" }}>
+//       <TextArea
+//         placeholder="Say hello..."
+//         allowClear
+//         onKeyUp={handleKeyUp}
+//         // onChange={onChange}
+//       />
+//     </div>
+//   </>
+// )}

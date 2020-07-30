@@ -201,7 +201,25 @@ const ChatBox = (props) => {
               // )[0].offsetHeight;
 
               // setHeight(heightElement * 0.7);
+              const timecheck = Date.now();
+              console.log("what is the timestamp-->", typeof timecheck);
 
+              console.log(
+                "what is the timestamp-->",
+                timecheck.toLocaleString()
+              );
+              console.log("what is the timestamp-->", typeof chat.timestamp);
+              console.log(
+                "what is the timestamp-->",
+                chat.timestamp.toLocaleString()
+              );
+              console.log(
+                "what is the timestamp again-->",
+                new Date(chat.timestamp).toLocaleString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              );
               return (
                 <Fragment key={index}>
                   {/* {(isFirst || !inSequence || hasDelay) && ( */}
@@ -245,7 +263,13 @@ const ChatBox = (props) => {
                       paddingRight: 7,
                     }}
                   >
-                    {chat.timestamp} <strong>{`${chat.user}: `}</strong>
+                    {new Date(chat.timestamp)
+                      .toLocaleString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                      .slice(0, -2)}{" "}
+                    <strong>{`${chat.user}: `}</strong>
                     {chat.message}
                   </p>
                 </Fragment>

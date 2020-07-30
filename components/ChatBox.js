@@ -163,7 +163,7 @@ const ChatBox = (props) => {
     props.activeUser && (
       <>
         <Card
-          title={props.activeUser}
+          title={"Chat"}
           style={{
             // boxSizing: "border-box",
             height: "82%",

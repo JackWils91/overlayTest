@@ -5,11 +5,12 @@ import React, {
   useRef,
   useLayoutEffect,
 } from "react";
-import { Card, Input, Row, Col, Form } from "antd";
+import { Card, Input, Row, Col, Form, Button, Popover } from "antd";
 const { TextArea } = Input;
 import ChatBox from "./ChatBox";
 import { fetchPostJSON } from "../utils/routing";
 import { Picker } from "emoji-mart";
+import { SettingOutlined } from "@ant-design/icons";
 const messageRoute =
   process.env.NODE_ENV === "production"
     ? "https://charity-chachacha.herokuapp.com/message"
@@ -116,6 +117,31 @@ const ChatComponent = ({ user }) => {
     setShowEmojis(false);
   };
 
+  const [visible, setVisible] = useState(false);
+
+  const hide = () => {
+    console.log("hide");
+    setVisible(false);
+    // this.setState({
+    //   visible: false,
+    // });
+  };
+
+  const handleVisibleChange = (visible) => {
+    // this.setState({ visible });
+    console.log("handleVisibleChange", visible);
+    setVisible(visible);
+  };
+
+  const settingsArray = [
+    "Edit Appearance Name Color",
+    "Timestamps",
+    "Readable Colors",
+    "Chat Rules",
+    "Hide Chat",
+    <a onClick={hide}>Close</a>,
+  ];
+
   return (
     user && (
       <>
@@ -163,6 +189,29 @@ const ChatComponent = ({ user }) => {
             }
           </div>
           {/* </Form> */}
+          {/* <Button type="primary" title="Chat" /> */}
+
+          <Button
+            onClick={() => handleKeyUp({ keyCode: 13 })}
+            style={{ marginTop: "5px", float: "right" }}
+            type="primary"
+          >
+            Chat
+          </Button>
+          <Popover
+            content={settingsArray.map((item) => (
+              <p>{item}</p>
+            ))}
+            title="Settings"
+            trigger="click"
+            visible={visible}
+            onVisibleChange={handleVisibleChange}
+          >
+            <Button
+              icon={<SettingOutlined />}
+              style={{ marginTop: "5px", float: "right", border: 0 }}
+            />
+          </Popover>
         </div>
       </>
     )

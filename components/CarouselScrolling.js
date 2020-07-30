@@ -78,10 +78,11 @@ const CarouselScrolling = (props) => {
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false, // when true it blocks the nextArrow prevArrov scroll
     speed: 9000,
     // autoplaySpeed: 9000,
     cssEase: "linear",
+    waitForAnimate: false,
 
     // nextArrow: <SampleNextArrow onClick={() => carouselRef.current.next()} />,
     // prevArrow: <SamplePrevArrow onClick={() => carouselRef.current.prev()} />,
@@ -89,15 +90,31 @@ const CarouselScrolling = (props) => {
     prevArrow: <SamplePrevArrow />,
     // rtl: false,
   });
+  const [settings1, setSettings1] = useState({
+    dots: false,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    cssEase: "linear",
+    // speed:2000,
+    autoplaySpeed: 6000,
+    pauseOnHover: true,
+
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    // rtl: false,
+  });
   //next
   return (
-    <Carousel ref={carouselRef} arrows {...settings}>
+    <Carousel ref={carouselRef} arrows {...settings1}>
       <div>
         <span className="avatar-item">
           <Badge count={"$10k"}>
             <Avatar
               shape="square"
-              size={94}
+              // size={94}
+              size={135}
               icon={
                 <img
                   style={{ display: "block", width: "100%", height: "auto" }}
@@ -115,7 +132,7 @@ const CarouselScrolling = (props) => {
           <Badge count={"$20k"}>
             <Avatar
               shape="square"
-              size={94}
+              size={135}
               icon={
                 <img
                   style={{ display: "block", width: "100%", height: "auto" }}
@@ -133,7 +150,7 @@ const CarouselScrolling = (props) => {
           <Badge count={"$25k"}>
             <Avatar
               shape="square"
-              size={94}
+              size={135}
               icon={
                 <img
                   style={{ display: "block", width: "100%", height: "auto" }}
@@ -151,7 +168,7 @@ const CarouselScrolling = (props) => {
           <Badge count={"$35k"}>
             <Avatar
               shape="square"
-              size={94}
+              size={135}
               icon={
                 <img
                   style={{ display: "block", width: "100%", height: "auto" }}
@@ -170,7 +187,7 @@ const CarouselScrolling = (props) => {
           <Badge count={"$55k"}>
             <Avatar
               shape="square"
-              size={94}
+              size={135}
               icon={
                 <img
                   style={{ display: "block", width: "100%", height: "auto" }}

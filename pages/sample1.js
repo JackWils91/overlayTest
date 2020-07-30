@@ -74,7 +74,7 @@ export default function Sample({ user }) {
   const randomVariable = 1;
   const videoJsOptions = {
     techOrder: ["youtube"],
-    autoplay: false,
+    autoplay: true,
     controls: true,
     sources: [
       {

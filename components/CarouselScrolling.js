@@ -1,40 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Carousel, Avatar, Badge } from "antd";
 
 import { LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 
 const CarouselScrolling = (props) => {
+  const carouselRef = useRef();
+  const [next, setNext] = useState();
+  const [slide, setSlide] = useState(0);
+  console.log("slide", slide);
+  // useEffect(() => {
+  //   setNext(carouselRef.current.slick.slickNext());
+  // }, []);
+
   function SampleNextArrow(props) {
+    console.log("clicks next");
+    console.log("props next-->", props);
     const { className, onClick } = props;
+    console.log("carouselRef", props.jack);
     return (
       <div
         className={className}
         onClick={() => {
-          // console.log(onClick, "-->next");
-          setSettings(({ rtl, ...remaining }) => ({
-            ...remaining,
-            rtl: true,
-          }));
+          carouselRef.current.next();
         }}
+        // onClick={() => {
+        //   console.log("carous data next", carouselRef.current.slick);
+        //   return carouselRef.current.slick.slickNext();
+        // }}
+        // onClick={() => next}
       >
-        <RightOutlined style={{ fontSize: "24px", color: "#000000" }} />
+        <RightOutlined
+          // onClick={onClick}
+          style={{ fontSize: "24px", color: "#000000" }}
+        />
       </div>
     );
   }
 
   function SamplePrevArrow(props) {
-    const { className, onClick } = props;
+    const { className, onClick, currentSlide, slideCount } = props;
+    // console.log(
+    //   "onClick->",
+    //   onClick((e) => console.log("inside click", e))
+    // );
     return (
       <div
         className={className}
+        // onClick={() => {
+        //   // console.log(onClick, "-->prev");
+        //   setSettings(({ /*rtl,*/ ...remaining }) => ({
+        //     ...remaining,
+        //     /*rtl: true,*/
+        //   }));
+        // }}
         onClick={() => {
-          // console.log(onClick, "-->prev");
-          setSettings(({ rtl, ...remaining }) => ({
-            ...remaining,
-            rtl: false,
-          }));
+          //         const prevSlide =  --currentSlide
+          //           const slidePosition  = prevSlide < 0 ? slideCount
+          // // --currentSlide
+          // setSlide(1);
+
+          // carouselRef.current.goTo(1);
+          carouselRef.current.prev();
         }}
+        // onClick={() => {
+        //   console.log("carous data prev", carouselRef.current.slick);
+        //   return carouselRef.current.slick.slickPrev();
+        // }}
       >
         <LeftOutlined style={{ fontSize: "24px", color: "#000000" }} />
       </div>
@@ -42,7 +74,7 @@ const CarouselScrolling = (props) => {
   }
 
   const [settings, setSettings] = useState({
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -51,12 +83,15 @@ const CarouselScrolling = (props) => {
     // autoplaySpeed: 9000,
     cssEase: "linear",
 
+    // nextArrow: <SampleNextArrow onClick={() => carouselRef.current.next()} />,
+    // prevArrow: <SamplePrevArrow onClick={() => carouselRef.current.prev()} />,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    rtl: false,
+    // rtl: false,
   });
+  //next
   return (
-    <Carousel dots={false} arrows {...settings}>
+    <Carousel ref={carouselRef} arrows {...settings}>
       <div>
         <span className="avatar-item">
           <Badge count={"$10k"}>

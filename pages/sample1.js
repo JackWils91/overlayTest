@@ -148,7 +148,7 @@ export default function Sample({ user }) {
         </Sider>
       </Layout>
       <Footer style={{ margin: "24 24" }}>
-        <CarouselScrolling style={{ zIndex: "-1" }} />
+        <CarouselScrolling />
       </Footer>
     </Layout>
   );

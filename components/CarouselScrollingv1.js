@@ -4,10 +4,11 @@ import { Carousel, Avatar, Badge } from "antd";
 
 import { LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 
-const CarouselScrolling = (props) => {
+const CarouselScrollingv1 = (props) => {
   const carouselRef = useRef();
   const [next, setNext] = useState();
   const [slide, setSlide] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
 
   console.log("slide being set before change", slide);
 
@@ -15,16 +16,19 @@ const CarouselScrolling = (props) => {
     // console.log("clicks next");
     // console.log("props next-->", props);
     const { className, onClick } = props;
-
+    // setSpeed(6000);
     return (
       <div
         className={className}
         onClick={() => {
+          setSpeed(0);
+          setAutoplay(false);
+          setDirection("next");
           // setSettings1(({ speed, ...prevData }) => prevData);
-          console.log("onclick current slide", props.currentSlide);
+          console.log("hitting onclickspeed-->", speed);
           // setMove({ arrow: "next", currentSlide: props.currentSlide });
-          arrows({ arrow: "prev", currentSlide: props.currentSlide });
-          // carouselRef.current.prev();
+          // arrows({ arrow: "prev", currentSlide: props.currentSlide });
+          // carouselRef.current.next();
           // setSettings1(initialState);
         }}
       >
@@ -38,80 +42,93 @@ const CarouselScrolling = (props) => {
 
   function SamplePrevArrow(props) {
     const { className, onClick, currentSlide, slideCount } = props;
-
+    // setSpeed(6000);
     return (
       <div
         className={className}
         // carouselRef.current.goTo(1);
         onClick={() => {
+          setSpeed(0);
+          setAutoplay(false);
+          setDirection("prev");
           // setSettings1(({ speed, ...prevData }) => prevData);
-          console.log("onclick current slide", props.currentSlide);
+          console.log("hittingonlcickspeed prev-->", speed);
           // setMove({ arrow: "prev", currentSlide: props.currentSlide });
-          arrows({ arrow: "prev", currentSlide: props.currentSlide });
+          // arrows({ arrow: "prev", currentSlide: props.currentSlide });
+          // carouselRef.current.prev();
         }}
       >
         <LeftOutlined style={{ fontSize: "24px", color: "#000000" }} />
       </div>
     );
   }
-  // const [count, setCount] = useState(0);
-  const [settings, setSettings] = useState({
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false, // when true it blocks the nextArrow prevArrov scroll
-    speed: 9000,
-    // autoplaySpeed: 9000,
-    cssEase: "linear",
-    waitForAnimate: false,
 
-    // nextArrow: <SampleNextArrow onClick={() => carouselRef.current.next()} />,
-    // prevArrow: <SamplePrevArrow onClick={() => carouselRef.current.prev()} />,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    // rtl: false,
-  });
+  const [speed, setSpeed] = useState(6000);
+  const [direction, setDirection] = useState("");
 
   const initialState = {
     dots: false,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: autoplay,
+    // cssEase: "cubic-bezier(1, 0, 0.5, 0)",
     cssEase: "linear",
-    speed: 6000,
-    autoplaySpeed: 6000,
+    speed: speed,
+    // speed: 0,
+    autoplaySpeed: 0,
     pauseOnHover: true,
 
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    beforeChange: (current, next) => setSlide({ current, next }),
-    // afterChange: current => this.setState({ activeSlide2: current })
+    beforeChange: (current, next) => {
+      // identify onclick, remove set speed to zero
+      // setSpeed(0);
+      console.log("before change", current, next);
+      // setSlide({ current, next });
+      if (direction === "next") {
+        //do stuff
+        console.log("beforechange next");
+        carouselRef.current.next();
+      }
+      if (direction === "prev") {
+        //do stuff
+        console.log("beforechange prev");
+        carouselRef.current.prev();
+      }
+    },
+    afterChange: (current, next) => {
+      // identify onclick, add set speed back to previous
+      // setSpeed(6000);
+
+      console.log("after change", speed);
+    },
     // rtl: false,
   };
-  const [settings1, setSettings1] = useState(initialState);
-  const [move, setMove] = useState("");
-  const arrows = ({ arrow, currentSlide }) => {
+
+  useEffect(() => {
     // Update the document title using the browser API
-    if (arrow === "next") {
-      console.log("next useEffect");
-      console.log("inside useEffect next", currentSlide, currentSlide + 1);
+    console.log("what is the speed hitting in useEffect?", speed);
+
+    if (direction === "next") {
+      console.log("hits useEffect next", speed);
       carouselRef.current.next();
+      setDirection("");
+      // setAutoplay(true);
     }
-    if (arrow === "prev") {
-      console.log("prev useEffect");
-      console.log("inside useEffect prev", currentSlide, currentSlide - 1);
+
+    if (direction === "prev") {
+      console.log("hits useEffect prev", speed);
       carouselRef.current.prev();
+      setDirection("");
+      // setAutoplay(true);
     }
-    // carouselRef.current.goTo(4);
-    console.log("gets inside useEffect when clicking next");
-  };
+  }, [speed]);
 
   //next
   //reset state - init
   return (
-    <Carousel ref={carouselRef} arrows {...settings1}>
+    <Carousel ref={carouselRef} arrows {...initialState}>
       <div>
         <span className="avatar-item">
           <Badge count={"$10k"}>
@@ -209,4 +226,4 @@ const CarouselScrolling = (props) => {
   );
 };
 
-export default CarouselScrolling;
+export default CarouselScrollingv1;

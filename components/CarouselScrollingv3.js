@@ -4,7 +4,7 @@ import { Carousel, Avatar, Badge } from "antd";
 
 import { LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 
-const CarouselScrolling = (props) => {
+const CarouselScrollingv3 = (props) => {
   const carouselRef = useRef();
   const [next, setNext] = useState();
   const [slide, setSlide] = useState(0);
@@ -15,19 +15,9 @@ const CarouselScrolling = (props) => {
     // console.log("clicks next");
     // console.log("props next-->", props);
     const { className, onClick } = props;
-
+    // setSpeed(6000);
     return (
-      <div
-        className={className}
-        onClick={() => {
-          // setSettings1(({ speed, ...prevData }) => prevData);
-          console.log("onclick current slide", props.currentSlide);
-          // setMove({ arrow: "next", currentSlide: props.currentSlide });
-          arrows({ arrow: "prev", currentSlide: props.currentSlide });
-          // carouselRef.current.prev();
-          // setSettings1(initialState);
-        }}
-      >
+      <div className={className} onClick={onClick}>
         <RightOutlined
           // onClick={onClick}
           style={{ fontSize: "24px", color: "#000000" }}
@@ -38,17 +28,12 @@ const CarouselScrolling = (props) => {
 
   function SamplePrevArrow(props) {
     const { className, onClick, currentSlide, slideCount } = props;
-
+    // setSpeed(6000);
     return (
       <div
         className={className}
         // carouselRef.current.goTo(1);
-        onClick={() => {
-          // setSettings1(({ speed, ...prevData }) => prevData);
-          console.log("onclick current slide", props.currentSlide);
-          // setMove({ arrow: "prev", currentSlide: props.currentSlide });
-          arrows({ arrow: "prev", currentSlide: props.currentSlide });
-        }}
+        onClick={onClick}
       >
         <LeftOutlined style={{ fontSize: "24px", color: "#000000" }} />
       </div>
@@ -73,23 +58,55 @@ const CarouselScrolling = (props) => {
     // rtl: false,
   });
 
+  const [speed, setSpeed] = useState(6000);
+  const [direction, setDirection] = useState("");
+
   const initialState = {
     dots: false,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
+    // cssEase: "cubic-bezier(1, 0, 0.5, 0)",
     cssEase: "linear",
-    speed: 6000,
-    autoplaySpeed: 6000,
+    speed: speed,
+    // speed: 0,
+    autoplaySpeed: 0,
     pauseOnHover: true,
 
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    beforeChange: (current, next) => setSlide({ current, next }),
-    // afterChange: current => this.setState({ activeSlide2: current })
+    // beforeChange: (current, next) => {
+    //   // identify onclick, remove set speed to zero
+    //   // setSpeed(0);
+    //   console.log("before change", current, next);
+    //   // setSlide({ current, next });
+    // },
+    // afterChange: (current, next) => {
+    //   // identify onclick, add set speed back to previous
+    //   // setSpeed(6000);
+    //   console.log("after change", speed);
+    // },
     // rtl: false,
   };
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log("what is the speed hitting in useEffect?", speed);
+
+    if (direction === "next") {
+      console.log("hits useEffect next", speed);
+      carouselRef.current.next();
+      setDirection("");
+    }
+
+    if (direction === "prev") {
+      console.log("hits useEffect prev", speed);
+      carouselRef.current.prev();
+      setDirection("");
+    }
+  }, [speed]);
+
   const [settings1, setSettings1] = useState(initialState);
   const [move, setMove] = useState("");
   const arrows = ({ arrow, currentSlide }) => {
@@ -111,7 +128,7 @@ const CarouselScrolling = (props) => {
   //next
   //reset state - init
   return (
-    <Carousel ref={carouselRef} arrows {...settings1}>
+    <Carousel ref={carouselRef} arrows {...initialState}>
       <div>
         <span className="avatar-item">
           <Badge count={"$10k"}>
@@ -209,4 +226,4 @@ const CarouselScrolling = (props) => {
   );
 };
 
-export default CarouselScrolling;
+export default CarouselScrollingv3;

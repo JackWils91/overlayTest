@@ -4,30 +4,16 @@ import { Carousel, Avatar, Badge } from "antd";
 
 import { LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 
-const CarouselScrolling = (props) => {
+const CarouselScrollingv2 = (props) => {
   const carouselRef = useRef();
-  const [next, setNext] = useState();
-  const [slide, setSlide] = useState(0);
-
-  console.log("slide being set before change", slide);
 
   function SampleNextArrow(props) {
     // console.log("clicks next");
     // console.log("props next-->", props);
     const { className, onClick } = props;
-
+    // setSpeed(6000);
     return (
-      <div
-        className={className}
-        onClick={() => {
-          // setSettings1(({ speed, ...prevData }) => prevData);
-          console.log("onclick current slide", props.currentSlide);
-          // setMove({ arrow: "next", currentSlide: props.currentSlide });
-          arrows({ arrow: "prev", currentSlide: props.currentSlide });
-          // carouselRef.current.prev();
-          // setSettings1(initialState);
-        }}
-      >
+      <div className={className} onClick={onClick}>
         <RightOutlined
           // onClick={onClick}
           style={{ fontSize: "24px", color: "#000000" }}
@@ -38,80 +24,33 @@ const CarouselScrolling = (props) => {
 
   function SamplePrevArrow(props) {
     const { className, onClick, currentSlide, slideCount } = props;
-
+    // setSpeed(6000);
     return (
       <div
         className={className}
         // carouselRef.current.goTo(1);
-        onClick={() => {
-          // setSettings1(({ speed, ...prevData }) => prevData);
-          console.log("onclick current slide", props.currentSlide);
-          // setMove({ arrow: "prev", currentSlide: props.currentSlide });
-          arrows({ arrow: "prev", currentSlide: props.currentSlide });
-        }}
+        onClick={onClick}
       >
         <LeftOutlined style={{ fontSize: "24px", color: "#000000" }} />
       </div>
     );
   }
-  // const [count, setCount] = useState(0);
-  const [settings, setSettings] = useState({
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false, // when true it blocks the nextArrow prevArrov scroll
-    speed: 9000,
-    // autoplaySpeed: 9000,
-    cssEase: "linear",
-    waitForAnimate: false,
 
-    // nextArrow: <SampleNextArrow onClick={() => carouselRef.current.next()} />,
-    // prevArrow: <SamplePrevArrow onClick={() => carouselRef.current.prev()} />,
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    // rtl: false,
-  });
-
-  const initialState = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    cssEase: "linear",
-    speed: 6000,
-    autoplaySpeed: 6000,
-    pauseOnHover: true,
-
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    beforeChange: (current, next) => setSlide({ current, next }),
-    // afterChange: current => this.setState({ activeSlide2: current })
-    // rtl: false,
-  };
-  const [settings1, setSettings1] = useState(initialState);
-  const [move, setMove] = useState("");
-  const arrows = ({ arrow, currentSlide }) => {
-    // Update the document title using the browser API
-    if (arrow === "next") {
-      console.log("next useEffect");
-      console.log("inside useEffect next", currentSlide, currentSlide + 1);
-      carouselRef.current.next();
-    }
-    if (arrow === "prev") {
-      console.log("prev useEffect");
-      console.log("inside useEffect prev", currentSlide, currentSlide - 1);
-      carouselRef.current.prev();
-    }
-    // carouselRef.current.goTo(4);
-    console.log("gets inside useEffect when clicking next");
   };
 
   //next
   //reset state - init
   return (
-    <Carousel ref={carouselRef} arrows {...settings1}>
+    <Carousel ref={carouselRef} arrows {...settings}>
       <div>
         <span className="avatar-item">
           <Badge count={"$10k"}>
@@ -209,4 +148,4 @@ const CarouselScrolling = (props) => {
   );
 };
 
-export default CarouselScrolling;
+export default CarouselScrollingv2;

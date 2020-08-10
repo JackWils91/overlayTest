@@ -1,0 +1,28 @@
+.slideshow {
+  margin-top: calc(50vh - 25vh);
+  padding-bottom: 4vw;
+}
+
+.slide {
+  width: 23vw;
+  //   max-resolution: 4vw;
+  margin-right: 4vw;
+  text-align: center;
+  height: 50vh;
+  background-color: red;
+  border-radius: 6px;
+  color: #fff;
+  font-family: "Helvetica Neue", helvetica, arial;
+  font-size: 24px;
+  line-height: 50vh;
+
+  $numItems: 10;
+  $eachDeg: 100deg / $numItems;
+  $color: blue;
+
+  @for $idx from 1 through $numItems {
+    &:nth-child(#{$idx}) {
+      background-color: adjust-hue($color, $eachDeg * $idx);
+    }
+  }
+}

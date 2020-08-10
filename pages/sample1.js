@@ -27,8 +27,13 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import CarouselScrolling from "../components/CarouselScrolling";
+import CarouselScrollingv1 from "../components/CarouselScrollingv1";
+import CarouselScrollingv2 from "../components/CarouselScrollingv2";
 import ChatBox from "../components/ChatBox";
 import ChatComponent from "../components/ChatComponent";
+import CarouselScrollingv3 from "../components/CarouselScrollingv3";
+import CarouselScrollingv4 from "../components/CarouselScrollingv4";
+import CarouselScrollingv5 from "../components/CarouselScrollingv5";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -74,7 +79,7 @@ export default function Sample({ user }) {
   const randomVariable = 1;
   const videoJsOptions = {
     techOrder: ["youtube"],
-    autoplay: true,
+    autoplay: false,
     controls: true,
     sources: [
       {
@@ -148,7 +153,8 @@ export default function Sample({ user }) {
         </Sider>
       </Layout>
       <Footer style={{ margin: "24 24" }}>
-        <CarouselScrolling />
+        {/* <CarouselScrolling /> */}
+        <CarouselScrollingv4 />
       </Footer>
     </Layout>
   );

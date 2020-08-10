@@ -102,13 +102,4 @@ const CarouselComponent = () => {
   );
 };
 
-const slider = () => {
-  return (
-    <div>
-      <h1>React Flickity</h1>
-      <CarouselComponent />
-    </div>
-  );
-};
-
-export default slider;
+export default CarouselComponent;

@@ -34,6 +34,7 @@ import ChatComponent from "../components/ChatComponent";
 import CarouselScrollingv3 from "../components/CarouselScrollingv3";
 import CarouselScrollingv4 from "../components/CarouselScrollingv4";
 import CarouselScrollingv5 from "../components/CarouselScrollingv5";
+import CarouselFinal from "../components/CarouselFinal";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -152,9 +153,10 @@ export default function Sample({ user }) {
           <ChatComponent user={user} />
         </Sider>
       </Layout>
-      <Footer style={{ margin: "24 24" }}>
+      <Footer style={{ padding: 0 }}>
+        {/* <Footer style={{ margin: "24 24" }}> */}
         {/* <CarouselScrolling /> */}
-        <CarouselScrollingv4 />
+        <CarouselFinal />
       </Footer>
     </Layout>
   );

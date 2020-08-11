@@ -153,7 +153,7 @@ export default function Sample({ user }) {
           <ChatComponent user={user} />
         </Sider>
       </Layout>
-      <Footer style={{ marginBottom: 5, padding: 0 }}>
+      <Footer style={{ paddingBottom: "5vh", paddingLeft: 0, paddingRight: 0 }}>
         {/* <Footer style={{ margin: "24 24" }}> */}
         {/* <CarouselScrolling /> */}
         <CarouselFinal />

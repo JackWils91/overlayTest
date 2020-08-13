@@ -68,6 +68,7 @@ export default (req, res) => {
   if (type === "end-chat") {
     //clear array
     console.log("api/pusher/end-chat", req.body, "method", req.method);
+    console.log("Test for Samuel --> This webhook should not trigger anymore");
     // { "name": "channel_vacated", "channel": "my-channel" } webhhok
     const { name, channel } = req.body;
     console.log("name", name, "channel_vacated", channel);

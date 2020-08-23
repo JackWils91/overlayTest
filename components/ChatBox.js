@@ -259,7 +259,7 @@ const ChatBox = (props) => {
                       })
                       .slice(0, -2)}{" "} */}
                     <strong
-                      style={{ color: userColor }}
+                      style={{ color: chat.customTextColor }}
                     >{`${chat.user}: `}</strong>
                     {chat.message}
                   </p>

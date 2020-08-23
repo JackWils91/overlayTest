@@ -190,7 +190,7 @@ const ChatBox = (props) => {
               const userColor =
                 props.activeUser === chat.user
                   ? props.customUsernameColor
-                  : "#000";
+                  : chat.customTextColor;
               const isFirst = previous === index;
               const inSequence = chat.user === previousChat.user;
               const hasDelay =

@@ -36,9 +36,14 @@ export default (req, res) => {
         // chatHistory.messages.push(chat);
         // pusher.trigger("chat-room", "new-message", { chat });
         // console.log("message-->", { chat });
-        const { user = null, message = "", timestamp = +new Date() } = req.body;
+        const {
+          user = null,
+          message = "",
+          timestamp = +new Date(),
+          customTextColor = "#000",
+        } = req.body;
         // const sentimentScore = sentiment.analyze(message).score;
-        const chat = { user, message, timestamp };
+        const chat = { user, message, timestamp, customTextColor };
 
         chatHistory.messages.push(chat);
         console.log("messages array in message-->", chatHistory);

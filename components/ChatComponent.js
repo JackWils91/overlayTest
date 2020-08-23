@@ -37,7 +37,12 @@ const ChatComponent = ({ user }) => {
 
     if (evt.keyCode === 13 && !evt.shiftKey) {
       // const { activeUser: user } = props;
-      const chat = { user, message: text, timestamp: +new Date() };
+      const chat = {
+        user,
+        message: text,
+        timestamp: +new Date(),
+        customTextColor: customColor,
+      };
 
       // evt.target.value = "";
 

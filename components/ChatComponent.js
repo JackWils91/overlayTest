@@ -12,7 +12,7 @@ import { fetchPostJSON } from "../utils/routing";
 import { Picker } from "emoji-mart";
 import { SettingTwoTone } from "@ant-design/icons";
 // import ColorPicker from "./ColorPicker";
-import { ChromePicker } from "react-color";
+import { CirclePicker } from "react-color";
 
 const messageRoute =
   process.env.NODE_ENV === "production"
@@ -229,7 +229,7 @@ const ChatComponent = ({ user }) => {
             // ))}
 
             content={
-              <ChromePicker
+              <CirclePicker
                 color={customColor}
                 onChangeComplete={handleChangeComplete}
                 disableAlpha={true}

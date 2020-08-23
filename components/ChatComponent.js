@@ -11,7 +11,8 @@ import ChatBox from "./ChatBox";
 import { fetchPostJSON } from "../utils/routing";
 import { Picker } from "emoji-mart";
 import { SettingTwoTone } from "@ant-design/icons";
-import ColorPicker from "./ColorPicker";
+// import ColorPicker from "./ColorPicker";
+import { ChromePicker } from "react-color";
 
 const messageRoute =
   process.env.NODE_ENV === "production"
@@ -141,12 +142,32 @@ const ChatComponent = ({ user }) => {
   //   <a onClick={hide}>Close</a>,
   // ];
 
+  /**
+   * Color Picker
+   */
+
+  const [customColor, setCustomColor] = useState("#000");
+
+  const handleChangeComplete = (color) => {
+    setCustomColor(color.hex);
+  };
+
+  const chromeStyles = {
+    default: {
+      picker: {
+        // See the individual picker source for which keys to use
+        boxShadow: "none",
+      },
+    },
+  };
+
   return (
     user && (
       <>
         <ChatBox
           // dimensions={size}
           // height={height}
+          customUsernameColor={customColor}
           activeUser={user} /*user={user}*/
         />
 
@@ -202,7 +223,14 @@ const ChatComponent = ({ user }) => {
             //   <p>{item}</p>
             // ))}
 
-            content={<ColorPicker />}
+            content={
+              <ChromePicker
+                color={customColor}
+                onChangeComplete={handleChangeComplete}
+                disableAlpha={true}
+                styles={chromeStyles}
+              />
+            }
             // title="Settings"
             trigger="click"
             visible={visible}

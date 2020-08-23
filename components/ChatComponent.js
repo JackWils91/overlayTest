@@ -10,7 +10,9 @@ const { TextArea } = Input;
 import ChatBox from "./ChatBox";
 import { fetchPostJSON } from "../utils/routing";
 import { Picker } from "emoji-mart";
-import { SettingOutlined } from "@ant-design/icons";
+import { SettingTwoTone } from "@ant-design/icons";
+import ColorPicker from "./ColorPicker";
+
 const messageRoute =
   process.env.NODE_ENV === "production"
     ? "https://charity-chachacha.herokuapp.com/message"
@@ -133,14 +135,11 @@ const ChatComponent = ({ user }) => {
     setVisible(visible);
   };
 
-  const settingsArray = [
-    "Edit Appearance Name Color",
-    "Timestamps",
-    "Readable Colors",
-    "Chat Rules",
-    "Hide Chat",
-    <a onClick={hide}>Close</a>,
-  ];
+  // const settingsArray = [
+  //   "Edit Appearance Name Color",
+
+  //   <a onClick={hide}>Close</a>,
+  // ];
 
   return (
     user && (
@@ -199,17 +198,19 @@ const ChatComponent = ({ user }) => {
             Chat
           </Button>
           <Popover
-            content={settingsArray.map((item) => (
-              <p>{item}</p>
-            ))}
-            title="Settings"
+            // content={settingsArray.map((item) => (
+            //   <p>{item}</p>
+            // ))}
+
+            content={<ColorPicker />}
+            // title="Settings"
             trigger="click"
             visible={visible}
             onVisibleChange={handleVisibleChange}
           >
             <Button
-              icon={<SettingOutlined />}
-              style={{ marginTop: "5px", float: "right", border: 0 }}
+              icon={<SettingTwoTone /*twoToneColor="#eb2f96"*/ />}
+              style={{ marginTop: "5px", float: "left", border: 0 }}
             />
           </Popover>
         </div>

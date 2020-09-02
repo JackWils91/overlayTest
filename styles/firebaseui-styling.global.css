@@ -29,6 +29,7 @@
   margin-bottom: 0;
   padding-top: 0;
 }
+
 .firebaseui-container.firebaseui-id-page-callback {
   background: transparent;
   box-shadow: none;
@@ -47,7 +48,7 @@
 }
 .firebaseui-form-actions
   .mdl-button--raised.mdl-button--colored.firebaseui-button {
-  background: rgba(0, 0, 0, 0.1);
+  background: #1890ff;
 }
 .firebaseui-id-dismiss-info-bar {
   display: block;
@@ -60,3 +61,22 @@
   top: 10%;
   bottom: 10%;
 }
+
+.firebaseui-container.firebaseui-id-page-sign-in {
+  background: transparent;
+  box-shadow: none;
+}
+
+.firebaseui-container.firebaseui-id-page-password-sign-in {
+  background: transparent;
+  box-shadow: none;
+}
+
+.firebaseui-container.firebaseui-id-page-password-recovery {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* .firebaseui-container.firebaseui-id-email {
+  color: red;
+} */

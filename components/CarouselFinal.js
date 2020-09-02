@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Flickity from "react-flickity-component";
 
 import { Carousel, Avatar, Badge } from "antd";
+import ItemDonationCreateForm from "./ItemDonation";
 
 const CarouselComponent = () => {
   //adjustable variables
@@ -18,7 +19,7 @@ const CarouselComponent = () => {
     let flickity =
       carouselRef && carouselRef.current && carouselRef.current.flkty;
     if (isPaused) return;
-    if (flickity.slides) {
+    if (flickity?.slides) {
       flickity.x = (flickity.x - tickerSpeed) % flickity.slideableWidth;
       flickity.selectedIndex = flickity.dragEndRestingSelect();
       flickity.updateSelectedSlide();
@@ -72,6 +73,28 @@ const CarouselComponent = () => {
     selectedAttraction: 0.015,
     friction: 0.25,
   };
+
+  const arrayOfItems = [
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+  ];
+
+  const [visible, setVisible] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values);
+    setVisible(false);
+  };
+
   return (
     <>
       <div ref={listener}>
@@ -86,18 +109,29 @@ const CarouselComponent = () => {
           static // default false
           // flickityRef
         >
-          <div className="slide">One</div>
-          <div className="slide">Two</div>
-          <div className="slide">Three</div>
-          <div className="slide">Four</div>
-          <div className="slide">Five</div>
-          <div className="slide">Six</div>
-          <div className="slide">Seven</div>
-          <div className="slide">Eight</div>
-          <div className="slide">Nine</div>
-          <div className="slide">Ten</div>
+          {arrayOfItems.map((item) => (
+            <div
+              className="slide"
+              onClick={() => {
+                setVisible(true);
+                setTitle(item);
+                console.log("sends to a donate page?");
+              }}
+            >
+              {item}
+            </div>
+          ))}
         </Flickity>
       </div>
+      <ItemDonationCreateForm
+        // {...props}
+        title={title}
+        visible={visible}
+        onCreate={onCreate}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
     </>
   );
 };

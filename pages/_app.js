@@ -6,6 +6,7 @@ import "../styles/layout.css";
 import "../styles/canvas.css";
 import "../styles/carousel.css";
 import "../styles/popover.css";
+import "../styles/firebaseui-styling.global.css";
 
 import "emoji-mart/css/emoji-mart.css";
 

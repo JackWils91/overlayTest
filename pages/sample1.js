@@ -17,27 +17,18 @@ const { TextArea } = Input;
 import CollectionsPage from "../components/MakeADonation";
 import LoginButton from "../components/LoginButton";
 
-import { Picker } from "emoji-mart";
-
-import {
-  // UserOutlined,
-  // LaptopOutlined,
-  // NotificationOutlined,
-  LeftOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
-import CarouselScrolling from "../components/CarouselScrolling";
-import CarouselScrollingv1 from "../components/CarouselScrollingv1";
-import CarouselScrollingv2 from "../components/CarouselScrollingv2";
-import ChatBox from "../components/ChatBox";
 import ChatComponent from "../components/ChatComponent";
 import CarouselScrollingv3 from "../components/CarouselScrollingv3";
 import CarouselScrollingv4 from "../components/CarouselScrollingv4";
 import CarouselScrollingv5 from "../components/CarouselScrollingv5";
-import CarouselFinal from "../components/CarouselFinal";
+
+import { useUser2 } from "../utils/auth/useUser2";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
+const CarouselFinal = dynamic(() => import("../components/CarouselFinal"), {
+  ssr: false,
+});
 
 // function useDimensions(targetRef) {
 //   const getDimensions = () => {
@@ -72,12 +63,15 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Sample({ user }) {
-  const [emoji, setEmoji] = useState();
+export default function Sample({ user: guest }) {
+  // console.log("what is user?-->", user);
+  const { user: userLogin, logout } = useUser2();
+  // console.log("what is user1?-->", user1);
+
+  const user = userLogin ? userLogin.email : guest;
 
   console.log("sample rendering?");
 
-  const randomVariable = 1;
   const videoJsOptions = {
     techOrder: ["youtube"],
     autoplay: false,
@@ -123,7 +117,18 @@ export default function Sample({ user }) {
           {/* <Menu.Item key="1">nav 1</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item> */}
           <Menu.Item key="3">
-            <LoginButton title={"Login"} />
+            {!userLogin ? (
+              <LoginButton title={"Login"} />
+            ) : (
+              <Button
+                type="primary"
+                onClick={() => logout()}
+                // style={{ marginTop: 24 }}
+                size="large"
+              >
+                Logout
+              </Button>
+            )}
           </Menu.Item>
         </Menu>
       </Header>
